@@ -2,8 +2,6 @@ import json
 import os
 import os.path
 import warnings
-from collections import Counter
-from http import HTTPStatus
 from pathlib import Path
 from typing import Dict, Type, TYPE_CHECKING, List, Optional, Any
 
