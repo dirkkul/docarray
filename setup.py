@@ -70,7 +70,7 @@ setup(
             'annlite',
         ],
         'weaviate': [
-            'weaviate-client~=3.3.0',
+            'weaviate-client~=3.9.0',
         ],
         'elasticsearch': [
             'elasticsearch>=8.2.0',
@@ -103,7 +103,7 @@ setup(
             'onnxruntime',
             'jupyterlab',
             'transformers>=4.16.2',
-            'weaviate-client~=3.3.0',
+            'weaviate-client~=3.9.0',
             'annlite',
             'elasticsearch>=8.2.0',
             'redis>=4.3.0',

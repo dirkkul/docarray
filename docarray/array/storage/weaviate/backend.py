@@ -37,7 +37,7 @@ class WeaviateConfig:
     # vectorIndexConfig parameters
     ef: Optional[int] = None
     ef_construction: Optional[int] = None
-    timeout_config: Optional[Tuple[int, int]] = None
+    timeout_config: Optional[Tuple[int, int]] = field(default=(10, 60))
     max_connections: Optional[int] = None
     dynamic_ef_min: Optional[int] = None
     dynamic_ef_max: Optional[int] = None
@@ -48,6 +48,14 @@ class WeaviateConfig:
     skip: Optional[bool] = None
     columns: Optional[Union[List[Tuple[str, str]], Dict[str, str]]] = None
     distance: Optional[str] = None
+    # weaviate python client parameters
+    batch_size: Optional[int] = field(default=50)
+    number_workers: Optional[int] = field(default=1)
+    dynamic_batching: Optional[bool] = field(default=False)
+
+    def __post_init__(self):
+        if isinstance(self.timeout_config, list):
+            self.timeout_config = tuple(self.timeout_config)
 
 
 _banned_classname_chars = [
@@ -98,7 +106,6 @@ class BackendMixin(BaseBackendMixin):
         :raises ValueError: only one of name or docs can be used for initialization,
             raise an error if both are provided
         """
-
         config = copy.deepcopy(config)
         if not config:
             config = WeaviateConfig()
